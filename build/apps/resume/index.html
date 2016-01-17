@@ -18,11 +18,15 @@
       <div class="container">
 
         <h1>Lili Ji</h1>
+        <h3>Email Address</h3>
+        <ul class="collection" id="email"></ul>
+        <h4>Education</h4>
+        <ul class="collection" id="education"></ul>
+        <h5>Skill Summary</h5>
+        <ul class="collection" id="skill"></ul>
 
         <h2>Favorite Programming Languages</h2>
-        <ul class="collection">
-          <li class="collection-item">Javascript</li>
-          <li class="collection-item">SQL</li>
+        <ul class="collection" id="languages">
         </ul>
 
         <h2>Favorite Food</h2>
@@ -37,12 +41,40 @@
         var ref = new Firebase('https://hello-ucdd.firebaseio.com/')
 
         // read data from the location bio/favorite_foods, only once
+
         ref.child('bio/favorite_foods').once('value', function(snapshot){
           var foods = snapshot.val()
           foods.forEach(function(food){
             $('#foods').append('<li class="collection-item">' + food + '</li>')
           })
-        })
+        });
+        ref.child('bio/email').once('value', function(snapshot){
+          var email = snapshot.val()
+          email.forEach(function(email){
+            $('#email').append('<li class="collection-item">' + email + '</li>')
+          })
+        });
+        ref.child('bio/skill').once('value', function(snapshot){
+          var skill = snapshot.val()
+          skill.forEach(function(skill){
+            $('#skill').append('<li class="collection-item">' + skill + '</li>')
+          })
+        });
+        ref.child('bio/education').once('value', function(snapshot){
+          var education = snapshot.val()
+          education.forEach(function(education){
+            $('#education').append('<li class="collection-item">' + education + '</li>')
+          })
+        });
+        ref.child('bio/languages').once('value', function(snapshot){
+          var languages = snapshot.val()
+          languages.forEach(function(languages){
+            $('#languages').append('<li class="collection-item">' + languages + '</li>')
+          })
+        });
+
+
+
       </script>
     </body>
   </html>
