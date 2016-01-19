@@ -17,7 +17,7 @@
 
       <div class="container">
 
-        <h1 class="center-align">My Team's ToDos App</h1>
+        <h1>My Team's ToDos App</h1>
         <ul class="collapsible" data-collapsible="accordion">
           <li>
             <div class="collapsible-header">Group members</div>
@@ -33,7 +33,7 @@
             </div>
           </li>
         </ul>
-
+		<style="font-size:14px"><a href="index.html">Index Page</a>&nbsp&nbsp&nbsp&nbsp<a href="low.html">Low Priority Tasks</a>&nbsp&nbsp&nbsp&nbsp<a href="medium.html">Medium Priority Tasks </a> &nbsp&nbsp&nbsp&nbsp <a href="high.html">Heigh Priority Tasks</a></style>
         <h2 class="light-blue darken-4 white-text center-align">Tasks</h2>
         <ul class="collection" id="tasks">
         </ul>
@@ -41,12 +41,10 @@
       </div>
 
       <script>
-
         // create a firebase reference to the root
-        var ref = new Firebase('https://shining-fire-9960.firebaseio.com/')
-
+        var ref = new Firebase('https://bettybook.firebaseio.com/')
         // read data from the location todos/tasks, only once
-        ref.child('todos/tasks').once('value', function(snapshot){
+        ref.child('todos/tasks').on('value', function(snapshot){
           var tasks = snapshot.val();
           tasks.forEach(function(task){
             var card ='<li class="card light-blue lighten-3 z-depth-3 dismissable"><div class="card-content"><span class="card-title">';

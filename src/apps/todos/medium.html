@@ -17,24 +17,11 @@
 
       <div class="container">
 
-        <h1>My Team's ToDos App</h1>
-        <ul class="collapsible" data-collapsible="accordion">
-          <li>
-            <div class="collapsible-header">Group members</div>
-            <div class="collapsible-body">
-              <ul class="collection">
-                <li class="collection-item">Lili Ji</li>
-                <li class="collection-item">hui-min lu</li>
-                <li class="collection-item">Emily Randall</li>
-                <li class="collection-item">Varshini Jagannath </li>
-                <li class="collection-item">Yue Zhang </li>
-                <li class="collection-item"> Yadira Valadeez </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+
+
+
+        <h2 class="light-blue darken-4 white-text center-align">Medium Priority Tasks</h2>
 		<style="font-size:14px"><a href="index.html">Index Page</a>&nbsp&nbsp&nbsp&nbsp<a href="low.html">Low Priority Tasks</a>&nbsp&nbsp&nbsp&nbsp<a href="medium.html">Medium Priority Tasks </a> &nbsp&nbsp&nbsp&nbsp <a href="high.html">Heigh Priority Tasks</a></style>
-        <h2 class="light-blue darken-4 white-text center-align">Tasks</h2>
         <ul class="collection" id="tasks">
         </ul>
 
@@ -44,19 +31,27 @@
         // create a firebase reference to the root
         var ref = new Firebase('https://bettybook.firebaseio.com/')
         // read data from the location todos/tasks, only once
+
         ref.child('todos/tasks').on('value', function(snapshot){
           var tasks = snapshot.val();
+		  var card ='';
           tasks.forEach(function(task){
-            var card ='<li class="card light-blue lighten-3 z-depth-3 dismissable"><div class="card-content"><span class="card-title">';
-            card += task.title + '</span>';
+
+
             Object.keys(task).forEach(function(key) {
               if (key != 'title') {
-                card += '<p>' + key + ': ' + task[key] + '</p>';
+				if (task[key] == "medium")
+				{
+					card+='<li class="card light-blue lighten-3 z-depth-3 dismissable"><div class="card-content"><span class="card-title">';
+					card += task.title + '</span><p>'+"deadline: "+task.deadline;
+					card += '<p>' + key + ': ' + task[key] + '</p>'+'type: '+task.type+'<p>';
+				}
               }
             })
             card += '</div></li>';
-            $('#tasks').append(card);
+            $('#tasks').html(card);
           })
+
         })
       </script>
     </body>

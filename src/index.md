@@ -8,8 +8,11 @@ Everything I've learned from UCDD 2 - Spring 2016.
 
 ## Apps
 * [ToDos](apps/todos/)
-* [Resume](apps/resumes/)
+* [Resume](apps/resume/)
 
 ## Learning
 * [Intro](learning/intro)
 * [Week 1](learning/week1)
+
+## Hackathons
+* [ToDos v.2](hackathons/01-18)
