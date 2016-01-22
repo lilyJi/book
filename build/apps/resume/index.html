@@ -20,17 +20,17 @@
         <h1>Lili Ji</h1>
         <h3>Email Address</h3>
         <ul class="collection" id="email"></ul>
-        <h4>Education</h4>
+        <h3>Education</h3>
         <ul class="collection" id="education"></ul>
-        <h5>Skill Summary</h5>
+        <h3>Skill Summary</h3>
         <ul class="collection" id="skill"></ul>
 
-        <h2>Favorite Programming Languages</h2>
+        <h3>Favorite Programming Languages</h3>
         <ul class="collection" id="languages">
         </ul>
 
-        <h2>Favorite Food</h2>
-        <ul class="collection" id="foods">
+        <h3>Experience</h3>
+        <ul class="collection" id="experience">
         </ul>
 
       </div>
@@ -42,10 +42,10 @@
 
         // read data from the location bio/favorite_foods, only once
 
-        ref.child('bio/favorite_foods').once('value', function(snapshot){
-          var foods = snapshot.val()
-          foods.forEach(function(food){
-            $('#foods').append('<li class="collection-item">' + food + '</li>')
+        ref.child('bio/experience').once('value', function(snapshot){
+          var experience = snapshot.val()
+          experience.forEach(function(experience){
+            $('#experience').append('<li class="collection-item">' + experience + '</li>')
           })
         });
         ref.child('bio/email').once('value', function(snapshot){
