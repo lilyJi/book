@@ -18,7 +18,7 @@
       <div class="container">
 
         <h1> Adding a Task </h1>
-
+        
         <a class="waves-effect waves-light btn" href="index.html">Return to task list</a>
 
         <div class="row">
@@ -39,21 +39,21 @@
              <label>Priority</label>
            </div>
         </div>
-
+        
         <div class="row">
           <div class="input-field col s12">
             <input value="" id="type" type="text" class="validate">
             <label for="type">Type</label>
           </div>
         </div>
-
+        
         <div class="row">
           <div class="input-field col s12">
             <input value="" id="assigned" type="text" class="validate">
             <label for="assigned">Assigned</label>
           </div>
         </div>
-
+        
         <div class="row">
           <div class="input-field col s12">
             <input value="" id="date" type="date" class="datepicker">
@@ -70,7 +70,7 @@
 
       <script>
 
-        var root = new Firebase('https://todos92.firebaseio.com/');
+        var root = new Firebase('https://shining-fire-9960.firebaseio.com/');
         var taskListRef = root.child('todos/tasks');
 
         $('#submit').click(function(){
@@ -79,16 +79,16 @@
           var priority;
           switch($('#priority').val()) {
             case '1':
-              priority = 'high';
+              priority = 'High';
               break;
             case '2':
-              priority = 'medium';
+              priority = 'Medium';
               break;
             default:
-              priority = 'low';
+              priority = 'Low';
               break;
           }
-
+          
           var type = $('#type').val();
           var date = $('#date').val();
           var assigned = $('#assigned').val();
@@ -101,11 +101,11 @@
             assigned: assigned,
             completed: false
           };
-
+          
           if (title != "" && date != "") {
             taskListRef.push().set(taskObject);
           }
-
+          
           location.href = 'index.html';
         })
 

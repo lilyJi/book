@@ -27,6 +27,7 @@
                 <li class="collection-item">hui-min lu</li>
                 <li class="collection-item">Emily Randall</li>
                 <li class="collection-item">Varshini Jagannath </li>
+                <li class="collection-item">Yue Zhang </li>
                 <li class="collection-item"> Yadira Valadeez </li>
               </ul>
             </div>
@@ -65,7 +66,7 @@
       <script>
 
         // create a firebase reference to the root
-        var ref = new Firebase('https://todos92.firebaseio.com/');
+        var ref = new Firebase('https://shining-fire-9960.firebaseio.com/');
 
         var markAsCompleted = function(key) {
           console.log(key);
@@ -97,10 +98,10 @@
               card += '<div class="card-action"><a class="btn" onclick=markAsCompleted("' + t + '") class="teal-text text-darken-3">Mark as Completed</a></div>';
             }
             card += '</li>';
-            if (task.priority === 'high') {
+            if (task.priority === 'High') {
               $('#high-pri').append(card);
             }
-            else if (task.priority === 'medium') {
+            else if (task.priority === 'Medium') {
               $('#med-pri').append(card);
             }
             else {
