@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
   <html>
     <head>
@@ -20,7 +21,8 @@
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
-      <script src="/js/leaflet.label.js"></script>
+      <script src="https://sweltering-torch-7007.firebaseapp.com/apps/parking/js/leaflet.label.js"></script>
+
 
 
 	<body style="background-image:url(SFstreet.png)">
@@ -48,7 +50,12 @@
 // create a firebase reference to the root
 var ref = new Firebase('https://publicdata-parking.firebaseio.com');
 
-var data
+var ref_users = new Firebase('https://mapuser.firebaseio.com');
+       var transitRef = new Firebase('https://publicdata-transit.firebaseio.com');
+       var data
+       var garages
+       var people
+       var vehicles
 
 // read data from the location san_francisco/garages, only once
 ref.child('san_francisco/garages').on('value', function(snapshot){
@@ -60,7 +67,25 @@ ref.child('san_francisco/garages').on('value', function(snapshot){
   })
 
   drawGarages(garages)
+  drawUsers(people)
+  drawBuses(vehicles)
 })
+ref_users.child('mapuser/people').on('value', function(snapshot) {
+           data = snapshot.val()
+           people = data
+               //console.log('data is loaded', data)
+           drawGarages(garages)
+           drawUsers(people)
+           drawBuses(vehicles)
+       })
+       transitRef.child('sf-muni/vehicles').on('value', function(snapshot) {
+           data = snapshot.val()
+           vehicles = data
+           console.log('data is loaded', data)
+           drawGarages(garages)
+           drawUsers(people)
+           drawBuses(vehicles)
+       })
 
 var attributionText = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
 
@@ -90,35 +115,99 @@ function drawGarages(garages){
     var latlng = [points[0], points[1]]
     var G_F_name = garage.friendlyName
 
-    // wanted to show the daily max you would pay, but i dont know how to search for DESC ["Daily Maximum / Lost Ticket"] and show the rate
+    // wanted to show the daily max you would pay, but i dont know how to search for RQ.Flat rate
     // var cost = garage.rates
 
     var o_spaces = garage.open_spaces
     var t_spaces = garage.total_spaces
+    var rate = garage.rates.RQ
+    var how_full = (o_spaces / t_spaces)
+    var full = parseInt(how_full * 100)
+    var content = ('<h5>'+G_F_name +'</h5>'+ "<br>There are " + o_spaces + " open spaces" + "<br>The garage is " + full + "% full" + "<br>");
+    var rate = garage.rates
+
 
     // create a circle layer
-    var circle = L.circle(latlng, 200, {
+    var circle;
 
-      color: 'green',
-      fillColor: 'grey',
+    _.forEach(rate, function(rate){
+     if (rate.BEG && rate.END) {
+       content = content + rate.BEG + ' - ' + rate.END;
+     } else {
+       content = content +rate.DESC;
+     }
+     if (rate.RATE !== '0') {
+       content = content + '<b>: $' + rate.RATE + '</b><br />';
+     } else {
+       content = content + '<b>: Free</b><br />';
+     }
+   })
+
+  if (how_full > 0.7){
+    circle = L.circle(latlng, 100, {
+      color: 'grey',
+      fillColor: 'red',
       fillOpacity: 0.5
-
-    }).addTo(map);
-
-    var circle = L.circle(latlng, 5, {
-
-      color: 'green',
-      fillColor: 'grey',
+    })
+  }
+  else if (how_full >= 0.4 && how_full <= 0.7){
+    circle = L.circle(latlng, 150, {
+      color: 'grey',
+      fillColor: 'orange',
       fillOpacity: 0.5
-
-    }).addTo(map);
+    })
+  }
+  else {
+    circle = L.circle(latlng, 200, {
+      color: 'grey',
+      fillColor: 'green',
+      fillOpacity: 0.5
+    })
+  }
 
     // add the circle layer to the makers layer group
     markersLayerGroup.addLayer(circle)
     // on click for area defined
-    circle.bindPopup(G_F_name + "<br>There are " + o_spaces + " open spaces");
+    circle.bindPopup(content);
   })
 }
+
+        function drawUsers(people) {
+            // clear all existing markers (if any)
+            _.forEach(people, function(person) {
+                var latlng = [person.lat, person.lon]
+                    // create a circle layer
+                var circle = L.circle(latlng, 15, {
+                        fillOpacity: 0.5,
+                        color: 'blue',
+                        fillColor: 'blue'
+                    }).bindLabel(person.name)
+                    //console.log(person.name + " Added to Map")
+                    // add the circle layer to the makers layer group
+                markersLayerGroup.addLayer(circle)
+            })
+        }
+
+        function drawBuses(vehicles) {
+            // clear all existing markers (if any)
+            _.forEach(vehicles, function(bus, key) {
+                var latlng = [bus.lat, bus.lon]
+                    // create a circle layer
+                var Icon = L.Icon.extend({
+                    options: {
+                        iconUrl: "bus.png",
+                        iconSize: [10, 10],
+                        shadowSize: [0, 0]
+                    }
+                })
+                console.log(bus.id + " Added to Map")
+                var busIcon = new Icon();
+                var circle = L.marker(latlng, {
+                    icon: busIcon
+                }).bindLabel("Route:"+bus.id).addTo(map);
+                markersLayerGroup.addLayer(circle)
+            })
+        }
       </script>
     </body>
   </html>

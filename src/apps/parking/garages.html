@@ -25,7 +25,7 @@
                 <div class="nav-wrapper blue-grey" id="SPpark-nav">
                     <!-- the href refreshes the page, but its all daynamic so it only for the user -->
 					<a href="index.html" class="brand-logo center">SANS-parking?</a>
-                    
+
                     <ul class="right hide-on-small-and-down">
                         <li class="active"><a href="garages.html">Garages</a></li>
                         <li><a href="garages_map.html">Map</a></li>
@@ -64,15 +64,14 @@
 		})
 
 		function displayGarages(garages){
+
+
 		  // lodash _.forEach https://lodash.com/docs#forEach
-		  _.forEach(garages, function(val, key){
-			$('#garages').append('<li><div class="collapsible-header"><i class="material-icons">place</i><h4 class="light-blue darken-1 white-text center">' + val['friendlyName'] + '</h4></div><div class="collapsible-body light-green"><h5><p>Open Spaces: ' + val['open_spaces'] + '<br>Total Spaces: ' + val['total_spaces'] + '</p></h5></div></li>')
+		  _.forEach(garages, function(val,key){
+
+			$('#garages').append('<li><div class="collapsible-header z-depth-5"><i class="material-icons">place</i><h4>' + val['friendlyName'] + '</h4></div><div class="collapsible-body light-green"><h5><p>Open Spaces: ' + val['open_spaces'] + '<br>Total Spaces: ' + val['total_spaces'] + '</p></h5></div></li>')
 		  })
 		}
-
-
-
-
       </script>
     </body>
   </html>
