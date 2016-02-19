@@ -70,7 +70,7 @@ ref.child('san_francisco/garages').on('value', function(snapshot){
   drawUsers(people)
   drawBuses(vehicles)
 })
-ref_users.child('mapuser/people').on('value', function(snapshot) {
+/*ref_users.child('mapuser/people').on('value', function(snapshot) {
            data = snapshot.val()
            people = data
                //console.log('data is loaded', data)
@@ -86,6 +86,7 @@ ref_users.child('mapuser/people').on('value', function(snapshot) {
            drawUsers(people)
            drawBuses(vehicles)
        })
+       */
 
 var attributionText = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
 
@@ -188,7 +189,7 @@ function drawGarages(garages){
             })
         }
 
-        function drawBuses(vehicles) {
+  /*      function drawBuses(vehicles) {
             // clear all existing markers (if any)
             _.forEach(vehicles, function(bus, key) {
                 var latlng = [bus.lat, bus.lon]
@@ -208,6 +209,7 @@ function drawGarages(garages){
                 markersLayerGroup.addLayer(circle)
             })
         }
+        */
       </script>
     </body>
   </html>
