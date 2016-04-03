@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <!--Import stylesheet for twitter bootstrap-->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	  
+
 </head>
 <body background="images/lib1.jpg">
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -63,20 +63,33 @@ $(document).ready(function(){
   });
 </script>
 
-      
-      
-      <div class="container grey darken-4" align="center" style="width: 40%; margin-left: 30%; margin-top:14%;">
-        <form action="existingProjects.html" class="orange-text text-darken-3">
-              Username: <input type="text" name="username"><br>
-              Password: <input type="password" name="pwd"><br>
-              <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Submit
-    <i class="material-icons right">send</i></button>
-    <br/> <br/>
+      <div class="container" style="margin-top:200px; width=60px">
+      	<div class="row"> 
+        <div class="col s12 m6" >
+      		<div class="card small grey darken-3 orange-text text-darken-3">
+            <div class="card-title center">
+              <span class="orange-text text-darken-3"><strong>Collaborators</strong></span>
+            </div>
+            <div class="card-content">
+              <ol style="font-size:15px;">
+                <li>Carter Danzer</li>
+                <li>Loretta Garlick</li>
+              </ol>
+            </div>
+          </div>  
 
-            </form>	
+      	</div>
+        <div class="col s12 m6" >
+          <div class="card small grey darken-3">
+                <div class="card-content">
+                    <a class="waves-effect waves-light orange darken-3 btn" href="viewTasks.html">View all tasks in this project</a><br /><br />
+                    <a class="waves-effect waves-light orange darken-3 btn" href="addTask.html">Add a new task</a>
+                </div>
+          </div>       
+        </div>
       </div>
       </div>
-     
+
 	  
 </body>
 </html>
