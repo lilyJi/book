@@ -62,6 +62,10 @@ function saveData() {
 
     console.log(roomRef.key())
 
-    //window.top.close();
+    setTimeout(closeWindow,1000);
 
+}
+
+function closeWindow(){
+    window.top.close()
 }
