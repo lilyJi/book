@@ -4,7 +4,7 @@ class DeleteProj extends React.Component {
     var url = "delProj.html#"+projectID
     return (
       <div className="black-text center">
-        <h5>DELETE PROJECT DETAILS <a href={url} target="_blank" className="btn-floating btn-medium waves-effect waves-light light-green darken-3"><i className="material-icons">delete</i></a></h5>
+        <h5>Delete Event   <a href={url} target="_blank" className="btn-floating btn-medium waves-effect waves-light light-green darken-3"><i className="material-icons">delete</i></a></h5>
       </div>
     );
   }
